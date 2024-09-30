@@ -27,6 +27,7 @@ export const RightWrapper = styled.div`
   }
 
   .profile {
+    position: relative;
     display: flex;
     width: 77px;
     height: 42px;
