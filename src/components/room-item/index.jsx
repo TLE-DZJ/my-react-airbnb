@@ -24,56 +24,49 @@ const RoomItem = memo((props) => {
     setSelectIndex(newIndex)
   }
 
-  const pictureElement = (
-    <div className='cover'>
-    <img src={itemData.picture_url} alt="" />
-  </div>
-  )
-
-  const sliderElenment = (
-  <div className='slider'>
-    <div className='control'>
-      <div className="btn left" onClick={e => controlClickHandle(false)}>
-        <IconArrowLeft width="24" height="24"/>
-      </div>
-      <div className="btn right" onClick={e => controlClickHandle(true)}>
-        <IconArrowRight width="24" height="24"/>
-      </div>
-    </div>
-
-    <Carousel dots={false} ref={swiperRef}>
-      {
-        itemData.picture_urls.map((item, index) => {
-          return (
-            <div key={index} className="cover">
-              <img src={item} alt="" />
-            </div>
-          )
-        })
-      }
-    </Carousel>
-
-    {/* 指示器 */}
-    <div className='indicator'>
-      <Indicator selectIndex={selectIndex}>
-        {
-          itemData.picture_urls.map((item, index) => {
-            return (
-              <div className='item' key={item}>
-                <span className={classNames("dot", {active: selectIndex === index})}></span>
-              </div>
-            )
-          })
-        }
-      </Indicator>
-    </div>
-  </div>
-  )
 
   return (
-    <ItemWrapper itemWidth={itemWidth}>
+    <ItemWrapper itemWidth={itemWidth} >
       <div className='inner'>
-        { !itemData.picture_urls ? pictureElement : sliderElenment }
+        {
+          !itemData.picture_urls ? <div className='cover'>
+          <img src={itemData.picture_url} alt="" />
+        </div> :
+        <div className='slider'>
+          <div className='control'>
+            <div className="btn left" onClick={e => controlClickHandle(false)}>
+              <IconArrowLeft width="24" height="24"/>
+            </div>
+            <div className="btn right" onClick={e => controlClickHandle(true)}>
+              <IconArrowRight width="24" height="24"/>
+            </div>
+          </div>
+          <div className='indicator'>
+            <Indicator selectIndex={selectIndex}>
+              {
+                itemData.picture_urls.map((item, index) => {
+                  return (
+                    <div className='item' key={item}>
+                      <span className={classNames("dot", {active: selectIndex === index})}></span>
+                    </div>
+                  )
+                })
+              }
+            </Indicator>
+          </div>
+          <Carousel dots={false} ref={swiperRef}>
+            {
+              itemData.picture_urls.map((item, index) => {
+                return (
+                  <div key={index} className="cover">
+                    <img src={item} alt="" />
+                  </div>
+                )
+              })
+            }
+          </Carousel>
+        </div>
+        }
         <div className='desc'>{itemData.verify_info.messages.join("·")}</div>
         <div className='name'>{itemData.name}</div>
         <div className='price'>¥{itemData.price}/晚</div>
