@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { styleStrToObj } from './utils'
 
 const IconArrowLeft = memo((props) => {
+  // 结构设置动态大小
   const { width = 12, height = 12 } = props
 
   return (

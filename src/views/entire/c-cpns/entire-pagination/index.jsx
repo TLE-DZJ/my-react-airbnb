@@ -18,6 +18,7 @@ const EntirePagination = memo(() => {
   const dispatch = useDispatch()
   function pageChangeHandle(event, newPage) {
     window.scrollTo(0, 0)
+    // 更新最新的页码
     dispatch(fetchEntireDataAction(newPage-1))
   }
 
